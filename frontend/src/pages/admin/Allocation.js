@@ -31,15 +31,26 @@ const Allocation = () => {
     }, []);
 
     const fetchData = async () => {
+        setLoading(true);
         try {
             const [assetsRes, usersRes] = await Promise.all([
                 assetService.getAssets(),
                 userService.getUsers()
             ]);
-            setAssets(assetsRes.data);
-            setUsers(usersRes.data);
+
+            // Log for debugging
+            console.log("Assets fetched:", assetsRes.data?.length);
+            console.log("Users fetched:", usersRes.data?.length);
+
+            setAssets(assetsRes.data || []);
+            setUsers(usersRes.data || []);
         } catch (error) {
             console.error("Error fetching data", error);
+            toast({
+                variant: "destructive",
+                title: "Error fetching data",
+                description: "Could not load assets or users. Please check your connection."
+            });
         } finally {
             setLoading(false);
         }
@@ -47,6 +58,12 @@ const Allocation = () => {
 
     const handleAssign = async (e) => {
         e.preventDefault();
+
+        if (!formData.assetId || !formData.assignedTo) {
+            toast({ variant: "destructive", title: "Validation Error", description: "Please select both an asset and an employee." });
+            return;
+        }
+
         try {
             await allocationService.assignAsset(formData);
             toast({ title: "Success", description: "Asset assigned successfully" });
@@ -118,7 +135,11 @@ const Allocation = () => {
                                 <Label>Remarks</Label>
                                 <Input value={formData.remarks} onChange={(e) => setFormData({ ...formData, remarks: e.target.value })} />
                             </div>
-                            <Button type="submit" disabled={!formData.assetId || !formData.assignedTo}>Assign</Button>
+
+                            {availableAssets.length === 0 && <p className="text-sm text-yellow-600">No available assets to assign.</p>}
+                            {users.length === 0 && <p className="text-sm text-yellow-600">No users found.</p>}
+
+                            <Button type="submit">Assign</Button>
                         </form>
                     </CardContent>
                 </Card>

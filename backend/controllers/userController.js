@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/User');
+const generateEmployeeId = require('../utils/generateId');
 
 // @desc    Get all users (Admin)
 // @route   GET /api/users
@@ -17,7 +18,9 @@ exports.getUsers = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Private/Admin
 exports.createUser = asyncHandler(async (req, res) => {
-    const { employeeId, name, email, password, department, role } = req.body;
+    const { name, email, password, department, role } = req.body;
+
+    const employeeId = await generateEmployeeId();
 
     const user = await User.create({
         employeeId,

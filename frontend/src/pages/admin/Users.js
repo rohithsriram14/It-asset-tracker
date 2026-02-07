@@ -17,7 +17,6 @@ const Users = () => {
     const { toast } = useToast();
 
     const [formData, setFormData] = useState({
-        employeeId: '',
         name: '',
         email: '',
         password: '',
@@ -44,7 +43,7 @@ const Users = () => {
             await userService.createUser(formData);
             toast({ title: "User Created", description: "New employee added." });
             setIsDialogOpen(false);
-            setFormData({ employeeId: '', name: '', email: '', password: '', department: '', role: 'user' });
+            setFormData({ name: '', email: '', password: '', department: '', role: 'user' });
             fetchUsers();
         } catch (error) {
             toast({ variant: "destructive", title: "Error", description: error.response?.data?.error || "Failed to create user" });
@@ -66,10 +65,6 @@ const Users = () => {
                         </DialogHeader>
                         <form onSubmit={handleSubmit} className="grid gap-4 py-4">
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label>Employee ID</Label>
-                                    <Input value={formData.employeeId} onChange={(e) => setFormData({ ...formData, employeeId: e.target.value })} required />
-                                </div>
                                 <div className="space-y-2">
                                     <Label>Role</Label>
                                     <Select value={formData.role} onValueChange={(val) => setFormData({ ...formData, role: val })}>

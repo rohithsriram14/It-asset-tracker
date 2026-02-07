@@ -5,7 +5,7 @@ import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../components/ui/card';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -80,7 +80,13 @@ const Login = () => {
                         </Button>
                     </form>
                 </CardContent>
-                <CardFooter className="flex justify-between text-xs text-muted-foreground">
+                <CardFooter className="flex flex-col gap-4 text-xs text-muted-foreground">
+                    <div className="text-center">
+                        Don&apos;t have an account?{" "}
+                        <Link to="/register" className="underline text-primary hover:text-primary/90">
+                            Register
+                        </Link>
+                    </div>
                     <span>IT Asset Tracking System</span>
                 </CardFooter>
             </Card>

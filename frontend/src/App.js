@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/auth/Login';
+import Register from './pages/Register';
 import { ProtectedRoute, AdminRoute, AuthRoute } from './routes/ProtectedRoute';
 import AdminLayout from './layouts/AdminLayout';
 import EmployeeLayout from './layouts/EmployeeLayout';
@@ -31,6 +32,7 @@ function App() {
                 {/* Public Routes */}
                 <Route element={<AuthRoute />}>
                     <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
                 </Route>
 
                 {/* Protected Admin Routes */}

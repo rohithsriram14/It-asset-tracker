@@ -1,11 +1,14 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/User');
+const generateEmployeeId = require('../utils/generateId');
 
 // @desc    Register user
 // @route   POST /api/auth/register
 // @access  Public (or Admin only depending on requirements, prompt said Admin can create users, but kept public for initial setup/testing or if we follow strict 'Admin can create users' this might be User Create. Let's make this Admin only in routes, but logic here)
 exports.register = asyncHandler(async (req, res) => {
-    const { employeeId, name, email, password, department, role } = req.body;
+    const { name, email, password, department, role } = req.body;
+
+    const employeeId = await generateEmployeeId();
 
     // Create user
     const user = await User.create({
