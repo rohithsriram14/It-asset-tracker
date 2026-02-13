@@ -4,6 +4,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { useToast } from '../components/ui/use-toast';
 
 export default function Register() {
@@ -20,6 +21,10 @@ export default function Register() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
+    };
+
+    const handleRoleChange = (value) => {
+        setFormData({ ...formData, role: value });
     };
 
     async function handleSubmit(e) {
@@ -80,6 +85,19 @@ export default function Register() {
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
                             <Input id="email" type="email" value={formData.email} onChange={handleChange} required placeholder="name@example.com" />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="role">Role</Label>
+                            <Select onValueChange={handleRoleChange} defaultValue={formData.role}>
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select a role" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="user">User</SelectItem>
+                                    <SelectItem value="admin">Admin</SelectItem>
+                                </SelectContent>
+                            </Select>
                         </div>
 
                         <div className="space-y-2">

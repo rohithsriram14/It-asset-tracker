@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../../components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
 import { useToast } from '../../components/ui/use-toast';
-import { Plus, User as UserIcon } from 'lucide-react';
+import { Plus, User as UserIcon, Trash2, Shield, ShieldOff } from 'lucide-react';
 import { format } from 'date-fns';
 
 const Users = () => {
@@ -47,6 +47,29 @@ const Users = () => {
             fetchUsers();
         } catch (error) {
             toast({ variant: "destructive", title: "Error", description: error.response?.data?.error || "Failed to create user" });
+        }
+    };
+
+    const handleDeleteUser = async (userId) => {
+        if (window.confirm("Are you sure you want to delete this user?")) {
+            try {
+                await userService.deleteUser(userId);
+                toast({ title: "User Deleted", description: "The user has been removed." });
+                fetchUsers();
+            } catch (error) {
+                toast({ variant: "destructive", title: "Error", description: "Failed to delete user." });
+            }
+        }
+    };
+
+    const handleRoleUpdate = async (userId, currentRole) => {
+        const newRole = currentRole === 'admin' ? 'user' : 'admin';
+        try {
+            await userService.updateUser(userId, { role: newRole });
+            toast({ title: "Role Updated", description: `User role changed to ${newRole}.` });
+            fetchUsers();
+        } catch (error) {
+            toast({ variant: "destructive", title: "Error", description: "Failed to update role." });
         }
     };
 
@@ -111,6 +134,7 @@ const Users = () => {
                                 <TableHead>Department</TableHead>
                                 <TableHead>Role</TableHead>
                                 <TableHead>Joined</TableHead>
+                                <TableHead className="text-right">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -126,6 +150,26 @@ const Users = () => {
                                         </span>
                                     </TableCell>
                                     <TableCell>{format(new Date(user.createdAt), 'MMM dd, yyyy')}</TableCell>
+                                    <TableCell className="text-right">
+                                        <div className="flex justify-end gap-2">
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                onClick={() => handleRoleUpdate(user._id, user.role)}
+                                                title={user.role === 'admin' ? "Remove Admin" : "Make Admin"}
+                                            >
+                                                {user.role === 'admin' ? <ShieldOff className="h-4 w-4 text-orange-500" /> : <Shield className="h-4 w-4 text-green-500" />}
+                                            </Button>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                onClick={() => handleDeleteUser(user._id)}
+                                                title="Delete User"
+                                            >
+                                                <Trash2 className="h-4 w-4 text-red-500" />
+                                            </Button>
+                                        </div>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

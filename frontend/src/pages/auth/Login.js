@@ -6,6 +6,7 @@ import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../components/ui/card';
 import { useNavigate, Link } from 'react-router-dom';
+import { LayoutDashboard } from 'lucide-react';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -44,10 +45,25 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-background">
-            <Card className="w-[350px]">
-                <CardHeader>
-                    <CardTitle>Login</CardTitle>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-slate-100 dark:bg-slate-900 p-4">
+
+            <div className="text-center mb-6 space-y-2">
+                <div className="flex justify-center">
+                    <div className="p-3 bg-primary/10 rounded-full">
+                        <LayoutDashboard className="h-12 w-12 text-primary" />
+                    </div>
+                </div>
+                <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
+                    IT Asset Tracking System
+                </h1>
+                <p className="text-muted-foreground">
+                    Manage your organization's assets efficiently
+                </p>
+            </div>
+
+            <Card className="w-full max-w-md border-slate-200 shadow-xl dark:border-slate-800">
+                <CardHeader className="space-y-1 text-center">
+                    <CardTitle className="text-xl">Login</CardTitle>
                     <CardDescription>Enter your credentials to access the system.</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -58,7 +74,7 @@ const Login = () => {
                                 <Input
                                     id="email"
                                     type="email"
-                                    placeholder="name@example.com"
+                                    placeholder="name@company.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
@@ -80,14 +96,9 @@ const Login = () => {
                         </Button>
                     </form>
                 </CardContent>
-                <CardFooter className="flex flex-col gap-4 text-xs text-muted-foreground">
-                    <div className="text-center">
-                        Don&apos;t have an account?{" "}
-                        <Link to="/register" className="underline text-primary hover:text-primary/90">
-                            Register
-                        </Link>
-                    </div>
-                    <span>IT Asset Tracking System</span>
+                <CardFooter className="flex flex-col gap-2 text-center text-sm text-muted-foreground justify-center">
+                    <p>Don't have an account? <Link to="/register" className="underline text-primary hover:text-primary/90">Register</Link></p>
+                    <p>&copy; {new Date().getFullYear()} IT Asset Tracking System</p>
                 </CardFooter>
             </Card>
         </div>
