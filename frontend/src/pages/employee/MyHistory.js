@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import allocationService from '../../services/allocationService';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Card } from '../../components/ui/card';
 import { format } from 'date-fns';
-import { CheckCircle2, Circle } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 const MyHistory = () => {
     const [history, setHistory] = useState([]);
 
     useEffect(() => {
+        let isMounted = true;
         const fetchHistory = async () => {
-            const res = await allocationService.getMyHistory();
-            setHistory(res.data);
+            try {
+                const res = await allocationService.getMyHistory();
+                if (isMounted) setHistory(res.data);
+            } catch (err) {
+                console.error("Failed to fetch history:", err);
+            }
         };
         fetchHistory();
+        return () => { isMounted = false };
     }, []);
 
     return (

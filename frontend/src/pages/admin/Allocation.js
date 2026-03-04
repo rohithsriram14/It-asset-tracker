@@ -30,8 +30,7 @@ const Allocation = () => {
         fetchData();
     }, []);
 
-    const fetchData = async () => {
-        setLoading(true);
+    const fetchData = React.useCallback(async () => {
         try {
             const [assetsRes, usersRes] = await Promise.all([
                 assetService.getAssets(),
@@ -54,7 +53,11 @@ const Allocation = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [toast]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     const handleAssign = async (e) => {
         e.preventDefault();
