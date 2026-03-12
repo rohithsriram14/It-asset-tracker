@@ -24,9 +24,11 @@ export const AuthProvider = ({ children }) => {
                     }
                 } catch (err) {
                     console.error("Auth check failed", err);
-                    localStorage.removeItem('token');
-                    setUser(null);
-                    setIsAuthenticated(false);
+                    if (err.response && err.response.status === 401) {
+                        localStorage.removeItem('token');
+                        setUser(null);
+                        setIsAuthenticated(false);
+                    }
                 }
             }
             setLoading(false);

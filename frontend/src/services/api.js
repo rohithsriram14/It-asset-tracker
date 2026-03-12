@@ -26,9 +26,8 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response && error.response.status === 401) {
-            // Auto logout if 401? Or just let AuthContext handle it
-            // localStorage.removeItem('token');
-            // window.location.href = '/login';
+            localStorage.removeItem('token');
+            window.location.href = '/login';
         }
         return Promise.reject(error);
     }

@@ -40,6 +40,8 @@ const Assets = () => {
     const [search, setSearch] = useState('');
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [currentAsset, setCurrentAsset] = useState(null); // For Edit
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
     const { toast } = useToast();
 
     // Form State
@@ -72,6 +74,10 @@ const Assets = () => {
     useEffect(() => {
         fetchAssets();
     }, [fetchAssets]);
+
+    useEffect(() => {
+        setCurrentPage(1); // Reset to first page when search changes
+    }, [search]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -159,6 +165,12 @@ const Assets = () => {
             default: return 'bg-slate-100 text-slate-800 border border-slate-200';
         }
     };
+
+    // Pagination Logic
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentAssets = assets.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(assets.length / itemsPerPage);
 
     return (
         <motion.div
@@ -327,7 +339,7 @@ const Assets = () => {
                                     </TableCell>
                                 </TableRow>
                             ) : (
-                                assets.map((asset) => (
+                                currentAssets.map((asset) => (
                                     <TableRow key={asset._id} className="hover:bg-muted/30 transition-colors group">
                                         <TableCell className="font-medium">{asset.assetId}</TableCell>
                                         <TableCell>{asset.assetType}</TableCell>
@@ -363,13 +375,30 @@ const Assets = () => {
                         </TableBody>
                     </Table>
                 </div>
-                {/* Optional Pagination Placeholder */}
+                {/* Pagination Controls */}
                 {!loading && assets.length > 0 && (
                     <div className="border-t p-4 flex items-center justify-between text-sm text-muted-foreground bg-muted/10">
-                        <div>Showing <strong>{assets.length}</strong> items</div>
+                        <div>
+                            Showing <strong>{indexOfFirstItem + 1}</strong> to <strong>{Math.min(indexOfLastItem, assets.length)}</strong> of <strong>{assets.length}</strong> items
+                        </div>
                         <div className="flex items-center gap-2">
-                            <Button variant="outline" size="sm" disabled>Previous</Button>
-                            <Button variant="outline" size="sm" disabled>Next</Button>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                            >
+                                Previous
+                            </Button>
+                            <span className="mx-2 text-xs font-medium">Page {currentPage} of {totalPages}</span>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                            >
+                                Next
+                            </Button>
                         </div>
                     </div>
                 )}

@@ -18,6 +18,10 @@ connectDB();
 
 const app = express();
 
+// Trust proxy if we are behind a reverse proxy (e.g. Heroku, Bluemix, AWS ELB, Nginx, etc)
+// Required for express-rate-limit to correctly identify clients
+app.set('trust proxy', 1);
+
 // Body parser
 app.use(express.json());
 
@@ -35,7 +39,7 @@ app.use(xss());
 // Rate limiting
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 mins
-    max: 100,
+    max: 1000,
     message: 'Too many requests from this IP, please try again in 10 minutes'
 });
 app.use('/api', limiter);

@@ -207,14 +207,14 @@ const AdminDashboard = () => {
                                             data={typeData}
                                             cx="50%"
                                             cy="50%"
-                                            labelLine={false}
+                                            labelLine={true}
                                             innerRadius={60}
                                             outerRadius={90}
                                             fill="#8884d8"
                                             paddingAngle={5}
                                             dataKey="count"
                                             nameKey="_id"
-                                            label={({ _id, percent }) => `${_id} ${(percent * 100).toFixed(0)}%`}
+                                            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                                         >
                                             {typeData.map((entry, index) => (
                                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -222,6 +222,7 @@ const AdminDashboard = () => {
                                         </Pie>
                                         <RechartsTooltip
                                             contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                                            formatter={(value, name) => [value, name]}
                                         />
                                     </PieChart>
                                 </ResponsiveContainer>
