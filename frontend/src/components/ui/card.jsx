@@ -17,11 +17,14 @@ const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
 ))
 CardHeader.displayName = "CardHeader"
 
-const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
+const CardTitle = React.forwardRef(({ className, children, ...props }, ref) => (
+    // eslint-disable-next-line jsx-a11y/heading-has-content
     <h3
         ref={ref}
         className={cn("font-semibold leading-none tracking-tight", className)}
-        {...props} />
+        {...props}>
+        {children}
+    </h3>
 ))
 CardTitle.displayName = "CardTitle"
 

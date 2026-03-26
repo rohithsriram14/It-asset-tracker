@@ -12,7 +12,6 @@ import { useToast } from '../../components/ui/use-toast';
 const Allocation = () => {
     const [assets, setAssets] = useState([]);
     const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
     const { toast } = useToast();
 
     const [formData, setFormData] = useState({
@@ -25,10 +24,6 @@ const Allocation = () => {
         assetId: '', // To be selected from assigned assets
         remarks: ''
     });
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const fetchData = React.useCallback(async () => {
         try {
@@ -50,8 +45,6 @@ const Allocation = () => {
                 title: "Error fetching data",
                 description: "Could not load assets or users. Please check your connection."
             });
-        } finally {
-            setLoading(false);
         }
     }, [toast]);
 

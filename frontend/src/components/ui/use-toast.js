@@ -36,6 +36,7 @@ const addToRemoveQueue = (toastId) => {
 }
 
 export const reducer = (state, action) => {
+    // eslint-disable-next-line default-case
     switch (action.type) {
         case actionTypes.ADD_TOAST:
             return {
@@ -87,6 +88,8 @@ export const reducer = (state, action) => {
                 ...state,
                 toasts: state.toasts.filter((t) => t.id !== action.toastId),
             }
+        default:
+            return state
     }
 }
 
