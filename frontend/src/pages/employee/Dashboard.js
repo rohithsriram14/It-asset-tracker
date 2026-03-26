@@ -36,7 +36,7 @@ const Dashboard = () => {
         >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground">Welcome back, {user?.name?.split(' ')[0] || 'User'}</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground break-words">Welcome back, {user?.name?.split(' ')[0] || 'User'}</h2>
                     <p className="text-muted-foreground mt-1">Here's an overview of your assigned equipment.</p>
                 </div>
             </div>
@@ -52,7 +52,7 @@ const Dashboard = () => {
                     <CardContent className="pt-4 bg-card/50">
                         {loading ? <Skeleton className="h-8 w-16" /> : (
                             <>
-                                <div className="text-2xl font-bold text-foreground">{myAssets.length}</div>
+                                <div className="text-2xl md:text-3xl font-bold text-foreground">{myAssets.length}</div>
                                 <p className="text-xs text-muted-foreground mt-1">Equipment assigned to you</p>
                             </>
                         )}
@@ -69,7 +69,7 @@ const Dashboard = () => {
                     <CardContent className="pt-4 bg-card/50">
                         {loading ? <Skeleton className="h-8 w-16" /> : (
                             <>
-                                <div className="text-2xl font-bold text-foreground">{myAssets.length}</div>
+                                <div className="text-2xl md:text-3xl font-bold text-foreground">{myAssets.length}</div>
                                 <p className="text-xs text-muted-foreground mt-1">Currently in your possession</p>
                             </>
                         )}
@@ -86,7 +86,7 @@ const Dashboard = () => {
                     <CardContent className="pt-4 bg-card/50">
                         {loading ? <Skeleton className="h-8 w-16" /> : (
                             <>
-                                <div className="text-2xl font-bold text-foreground">Active</div>
+                                <div className="text-2xl md:text-3xl font-bold text-foreground">Active</div>
                                 <p className="text-xs text-muted-foreground mt-1">System access granted</p>
                             </>
                         )}

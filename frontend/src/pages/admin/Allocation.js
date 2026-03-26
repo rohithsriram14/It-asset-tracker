@@ -87,7 +87,7 @@ const Allocation = () => {
 
     return (
         <div className="space-y-6">
-            <h2 className="text-3xl font-bold tracking-tight">Allocations</h2>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Allocations</h2>
 
             <div className="grid gap-6 md:grid-cols-2">
                 <Card>

@@ -21,7 +21,7 @@ const AuditLogs = () => {
 
     return (
         <div className="space-y-6">
-            <h2 className="text-3xl font-bold tracking-tight">Audit Logs</h2>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Audit Logs</h2>
             <Card>
                 <CardHeader>
                     <CardTitle>System Activity</CardTitle>

@@ -181,17 +181,17 @@ const Assets = () => {
         >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground">Assets Inventory</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">Assets Inventory</h2>
                     <p className="text-muted-foreground mt-1">Manage and track your organization's entire hardware and software inventory.</p>
                 </div>
 
                 <Dialog open={isDialogOpen} onOpenChange={(open) => { setIsDialogOpen(open); if (!open) resetForm(); }}>
                     <DialogTrigger asChild>
-                        <Button className="shadow-sm">
+                        <Button className="shadow-sm w-full sm:w-auto">
                             <Plus className="mr-2 h-4 w-4" /> Add New Asset
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[700px] overflow-y-auto max-h-[90vh] p-6 lg:p-8">
+                    <DialogContent className="w-[95vw] max-w-lg sm:max-w-[700px] overflow-y-auto max-h-[90vh] p-4 sm:p-6 lg:p-8">
                         <DialogHeader className="mb-4">
                             <DialogTitle className="text-2xl font-semibold flex items-center gap-2">
                                 <Package className="h-6 w-6 text-primary" />

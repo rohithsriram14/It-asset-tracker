@@ -92,7 +92,7 @@ const Reports = () => {
         >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground">System Reports</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">System Reports</h2>
                     <p className="text-muted-foreground mt-1">Exportable metrics and actionable insights for your assets.</p>
                 </div>
             </div>

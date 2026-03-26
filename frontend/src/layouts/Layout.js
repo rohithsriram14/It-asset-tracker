@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/button';
@@ -15,12 +15,12 @@ import {
 } from '../components/ui/dropdown-menu';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const SidebarItem = ({ to, icon: Icon, label }) => {
+const SidebarItem = ({ to, icon: Icon, label, onClick }) => {
     const location = useLocation();
     const isActive = location.pathname.startsWith(to);
 
     return (
-        <Link to={to} className="relative group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all">
+        <Link to={to} onClick={onClick} className="relative group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all">
             {isActive && (
                 <motion.div
                     layoutId="sidebar-active"
@@ -41,11 +41,22 @@ const Layout = ({ role, children }) => {
     const { logout, user } = useAuth();
     const { setTheme, theme } = useTheme();
     const location = useLocation();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
     return (
         <div className="grid min-h-screen w-full md:grid-cols-[240px_1fr] bg-background">
+            {/* Mobile Overlay */}
+            {isMobileMenuOpen && (
+                <div 
+                    className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden"
+                    onClick={closeMobileMenu}
+                />
+            )}
+
             {/* Sidebar */}
-            <div className="hidden border-r bg-card shadow-sm md:block z-20 relative">
+            <div className={`fixed inset-y-0 left-0 z-50 w-64 transform border-r bg-card shadow-lg transition-transform duration-200 ease-in-out md:static md:w-full md:translate-x-0 md:shadow-sm ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="flex h-full max-h-screen flex-col gap-4">
                     <div className="flex h-16 items-center px-6 border-b">
                         <Link to="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
@@ -60,22 +71,22 @@ const Layout = ({ role, children }) => {
                             {role === 'admin' ? (
                                 <>
                                     <div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Main</div>
-                                    <SidebarItem to="/admin/dashboard" icon={LayoutDashboard} label="Dashboard" />
-                                    <SidebarItem to="/admin/assets" icon={Package} label="Assets" />
-                                    <SidebarItem to="/admin/allocations" icon={Users} label="Allocations" />
-                                    <SidebarItem to="/admin/maintenance" icon={Activity} label="Maintenance" />
+                                    <SidebarItem to="/admin/dashboard" icon={LayoutDashboard} label="Dashboard" onClick={closeMobileMenu} />
+                                    <SidebarItem to="/admin/assets" icon={Package} label="Assets" onClick={closeMobileMenu} />
+                                    <SidebarItem to="/admin/allocations" icon={Users} label="Allocations" onClick={closeMobileMenu} />
+                                    <SidebarItem to="/admin/maintenance" icon={Activity} label="Maintenance" onClick={closeMobileMenu} />
 
                                     <div className="px-3 py-2 mt-4 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Administration</div>
-                                    <SidebarItem to="/admin/users" icon={Users} label="Users" />
-                                    <SidebarItem to="/admin/reports" icon={FileText} label="Reports" />
-                                    <SidebarItem to="/admin/audit-logs" icon={FileText} label="Audit Logs" />
+                                    <SidebarItem to="/admin/users" icon={Users} label="Users" onClick={closeMobileMenu} />
+                                    <SidebarItem to="/admin/reports" icon={FileText} label="Reports" onClick={closeMobileMenu} />
+                                    <SidebarItem to="/admin/audit-logs" icon={FileText} label="Audit Logs" onClick={closeMobileMenu} />
                                 </>
                             ) : (
                                 <>
                                     <div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Dashboard</div>
-                                    <SidebarItem to="/employee/dashboard" icon={LayoutDashboard} label="Overview" />
-                                    <SidebarItem to="/employee/my-assets" icon={Package} label="My Assets" />
-                                    <SidebarItem to="/employee/history" icon={Activity} label="My History" />
+                                    <SidebarItem to="/employee/dashboard" icon={LayoutDashboard} label="Overview" onClick={closeMobileMenu} />
+                                    <SidebarItem to="/employee/my-assets" icon={Package} label="My Assets" onClick={closeMobileMenu} />
+                                    <SidebarItem to="/employee/history" icon={Activity} label="My History" onClick={closeMobileMenu} />
                                 </>
                             )}
                         </nav>
@@ -86,8 +97,8 @@ const Layout = ({ role, children }) => {
             {/* Main Content */}
             <div className="flex flex-col min-h-screen overflow-hidden">
                 <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:px-6 shadow-sm">
-                    {/* Mobile Menu Toggle - placeholder for now */}
-                    <Button variant="ghost" size="icon" className="md:hidden">
+                    {/* Mobile Menu Toggle */}
+                    <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMobileMenuOpen(true)}>
                         <Menu className="h-5 w-5" />
                     </Button>
 

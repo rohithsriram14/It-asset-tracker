@@ -47,7 +47,7 @@ const MyAssets = () => {
         >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <motion.div variants={itemVariants}>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground">My Assets</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">My Assets</h2>
                     <p className="text-muted-foreground mt-1">Detailed view of equipment assigned to you.</p>
                 </motion.div>
             </div>

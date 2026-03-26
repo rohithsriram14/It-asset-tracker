@@ -99,7 +99,7 @@ const AdminDashboard = () => {
         >
             <div className="flex flex-col gap-1 md:flex-row md:items-center justify-between mb-8">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground">Dashboard</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">Dashboard</h2>
                     <p className="text-muted-foreground">Overview of your asset inventory and alerts.</p>
                 </div>
             </div>
@@ -115,7 +115,7 @@ const AdminDashboard = () => {
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold">{totalAssets}</div>
+                            <div className="text-2xl md:text-3xl font-bold">{totalAssets}</div>
                             <p className="text-xs text-muted-foreground mt-1">in the system</p>
                         </CardContent>
                     </Card>
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold">{assignedAssets}</div>
+                            <div className="text-2xl md:text-3xl font-bold">{assignedAssets}</div>
                             <p className="text-xs text-muted-foreground mt-1">currently allocated</p>
                         </CardContent>
                     </Card>
@@ -145,7 +145,7 @@ const AdminDashboard = () => {
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold">{availableAssets}</div>
+                            <div className="text-2xl md:text-3xl font-bold">{availableAssets}</div>
                             <p className="text-xs text-muted-foreground mt-1">ready for allocation</p>
                         </CardContent>
                     </Card>
@@ -160,7 +160,7 @@ const AdminDashboard = () => {
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold">{warrantyAlerts.length}</div>
+                            <div className="text-2xl md:text-3xl font-bold">{warrantyAlerts.length}</div>
                             <p className="text-xs text-muted-foreground mt-1">expiring soon</p>
                         </CardContent>
                     </Card>
@@ -175,7 +175,7 @@ const AdminDashboard = () => {
                             <CardDescription>Current state of all assets</CardDescription>
                         </CardHeader>
                         <CardContent className="pl-2">
-                            <div className="h-[300px]">
+                            <div className="h-[250px] md:h-[300px]">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <BarChart data={statusData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
@@ -200,7 +200,7 @@ const AdminDashboard = () => {
                             <CardDescription>Distribution by category</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <div className="h-[300px]">
+                            <div className="h-[250px] md:h-[300px]">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
                                         <Pie

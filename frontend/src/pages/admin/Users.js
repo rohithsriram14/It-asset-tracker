@@ -89,7 +89,7 @@ const Users = () => {
         >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground">User Management</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">User Management</h2>
                     <p className="text-muted-foreground mt-1">Manage system access, roles, and employee accounts.</p>
                 </div>
 
@@ -99,7 +99,7 @@ const Users = () => {
                             <Plus className="mr-2 h-4 w-4" /> Add Employee
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[500px]">
+                    <DialogContent className="w-[95vw] max-w-lg sm:max-w-[500px]">
                         <DialogHeader>
                             <DialogTitle className="text-2xl font-semibold flex items-center gap-2">
                                 <UsersIcon className="h-5 w-5 text-primary" /> Create Account
