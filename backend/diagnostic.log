@@ -1,0 +1,22 @@
+🔍 ENV DEBUG:
+ENV file path: c:\it asset\backend\.env
+ENV file exists: true
+ENV file content:
+ ﻿NODE_ENV=development
+MONGO_URI=mongodb+srv://rohithatlas14_db_user:rohithsriram@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority
+JWT_SECRET=secret123
+JWT_EXPIRE=30d
+
+Dotenv parsed: {
+  NODE_ENV: 'development',
+  MONGO_URI: 'mongodb+srv://rohithatlas14_db_user:rohithsriram@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority',
+  JWT_SECRET: 'secret123',
+  JWT_EXPIRE: '30d'
+}
+Process MONGO_URI: mongodb+srv://rohithatlas14_db_user:rohithsriram@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority
+================================
+
+Attempting to connect to: mongodb+srv://rohithatlas14_db_user:****@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority
+MongoDB connection error: querySrv ETIMEOUT _mongodb._tcp.cluster0.lfkkftc.mongodb.net
+Server is starting without a successful database connection.
+Server running in development mode on port 5000

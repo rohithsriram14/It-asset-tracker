@@ -1,0 +1,39 @@
+
+> it-asset-tracking-backend@1.0.0 dev
+> nodemon server.js
+
+[33m[nodemon] 3.1.11[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): server.js routes\**\* controllers\**\* models\**\* middleware\**\* config\**\* utils\**\*[39m
+[33m[nodemon] watching extensions: js,json[39m
+[32m[nodemon] starting `node server.js`[39m
+ENV file path: c:\it asset\backend\.env
+Dotenv config result: {
+  parsed: {
+    NODE_ENV: 'development',
+    MONGO_URI: 'mongodb+srv://rohithatlas14_db_user:rohithsriram@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority',
+    JWT_SECRET: 'secret123',
+    JWT_EXPIRE: '30d'
+  }
+}
+======= ENV DEBUG =======
+NODE_ENV: development
+MONGO_URI: mongodb+srv://rohithatlas14_db_user:rohithsriram@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority
+======================
+Attempting to connect to: mongodb+srv://rohithatlas14_db_user:****@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority
+MongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.lfkkftc.mongodb.net
+Server is starting without a successful database connection.
+Server running in development mode on port 5000
+[0mGET /favicon.ico [33m404[0m 6.824 ms - 150[0m
+[0mGET /favicon.ico [33m404[0m 3.589 ms - 150[0m
+MongooseError: Operation `users.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (c:\it asset\backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:187:23)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+[0mPOST /api/auth/login [31m500[0m 10031.732 ms - 89[0m
+[0mOPTIONS /api/auth/register [32m204[0m 1.229 ms - 0[0m
+MongooseError: Operation `users.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (c:\it asset\backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:187:23)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+[0mPOST /api/auth/register [31m500[0m 10009.844 ms - 89[0m

@@ -6,7 +6,8 @@
         "models",
         "middleware",
         "config",
-        "utils"
+        "utils",
+        ".env"
     ],
     "ext": "js,json",
     "ignore": [

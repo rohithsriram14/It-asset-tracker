@@ -2,12 +2,22 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGO_URI);
+        // Safe URI logging (hides password)
+        const safeUri = process.env.MONGO_URI 
+            ? process.env.MONGO_URI.replace(/:([^:@]+)@/, ':****@') 
+            : 'UNDEFINED';
+        console.log(`Attempting to connect to: ${safeUri}`);
+
+        // Removed deprecated useNewUrlParser and useUnifiedTopology
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            serverSelectionTimeoutMS: 10000
+        });
 
         console.log(`MongoDB Connected: ${conn.connection.host}`);
+        return conn;
     } catch (error) {
-        console.error(`Error: ${error.message}`);
-        process.exit(1);
+        console.error(`MongoDB connection error: ${error.message}`);
+        console.warn('Server is starting without a successful database connection.');
     }
 };
 

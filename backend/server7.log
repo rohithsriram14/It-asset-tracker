@@ -1,0 +1,20 @@
+
+> it-asset-tracking-backend@1.0.0 dev
+> nodemon server.js
+
+[33m[nodemon] 3.1.11[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): server.js routes\**\* controllers\**\* models\**\* middleware\**\* config\**\* utils\**\*[39m
+[33m[nodemon] watching extensions: js,json[39m
+[32m[nodemon] starting `node server.js`[39m
+Attempting to connect to: mongodb+srv://rohithatlas14_db_user:****@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority
+MongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.lfkkftc.mongodb.net
+Server is starting without a successful database connection.
+Port 5000 is already in use. Trying port 5001...
+Server running in development mode on port 5001
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `node server.js`[39m
+Attempting to connect to: mongodb+srv://rohithatlas14_db_user:****@cluster0.lfkkftc.mongodb.net/project2?retryWrites=true&w=majority
+MongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.lfkkftc.mongodb.net
+Server is starting without a successful database connection.
+Server running in development mode on port 5000
